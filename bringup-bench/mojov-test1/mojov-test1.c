@@ -283,5 +283,6 @@ main(void)
   libmin_printf("\n");
 
   libmin_printf("INFO: All tests successed.\n");
+  libmin_success();
   return 0;
 }
