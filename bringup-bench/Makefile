@@ -39,7 +39,7 @@ BMARKS = ackermann aes anagram audio-codec avl-tree banner bit-kernels blake2b b
 BMARKS = ackermann aes anagram audio-codec avl-tree banner bit-kernels blake2b bloom-filter boyer-moore-search bubble-sort c-interp ccmac checkers cipher chi-squared congrad connect4-minimax convex-hull dhrystone distinctness donut fft-int flood-fill flood-fill-On2 frac-calc fuzzy-match fy-shuffle gcd-list grad-descent graph-tests hanoi heldkarp-tsp highlife heapsort heat-calc huff-encode idct-alg indirect-test k-means kadane kcore-decomp kepler knapsack knights-tour lcs lyndon-factors manacher-lps life longdiv lu-decomp lz-compress mandelbrot matmult max-subseq mersenne minspan mojov-stringtests monte-carlo moving-average moving-average-fp64 murmur-hash n-queens natlog nbody-sim seq-align nr-solver packet-filter private-auction vote-tally gene-risk parrondo pascal pi-calc primal-test priority-queue quaternions qsort-demo qsort-test quine rabinkarp-search rand-test ransac regex-parser rho-factor risk-score rle-compress secret-regex rsa-cipher sat-solver shortest-path sieve simple-grep skeleton soundex spelt2num spirograph strange sudoku-solver tetris-sim tiny-NN topo-sort totient transcend uniquify variability-sample vectors-3d verlet weekday randshell-sort
 BMARKS = ackermann aes anagram audio-codec avl-tree banner bit-kernels blake2b bloom-filter boyer-moore-search bubble-sort c-interp ccmac checkers cipher chi-squared congrad connect4-minimax convex-hull dhrystone distinctness donut fft-int flood-fill flood-fill-On2 frac-calc fuzzy-match fy-shuffle gcd-list grad-descent graph-tests hanoi highlife heapsort heat-calc huff-encode idct-alg indirect-test k-means kadane kcore-decomp kepler knapsack knights-tour lcs lyndon-factors manacher-lps life longdiv lu-decomp lz-compress mandelbrot matmult max-subseq mersenne minspan mojov-stringtests monte-carlo moving-average moving-average-fp64 murmur-hash n-queens natlog nbody-sim seq-align nr-solver packet-filter private-auction vote-tally gene-risk parrondo pascal pi-calc primal-test priority-queue quaternions qsort-demo qsort-test quine rabinkarp-search rand-test ransac regex-parser rho-factor risk-score rle-compress secret-regex rsa-cipher sat-solver scrambled-compare shortest-path sieve simple-grep skeleton soundex spelt2num spirograph strange sudoku-solver tetris-sim tiny-NN topo-sort totient transcend uniquify variability-sample vectors-3d verlet weekday randshell-sort
 
-#OPT_CFLAGS = -O0 -g
+# OPT_CFLAGS = -O0 -g
 OPT_CFLAGS = -O3 -g
 
 ifeq ($(TARGET), host)
@@ -214,6 +214,17 @@ TARGET_CLEAN = *.d ibex_simple_system_pcount.csv
 TARGET_EXCLUDES = anagram c-interp checkers lz-compress rsa-cipher spelt2num
 TARGET_CONFIGURED = 1
 TARGET_REFEXT = out
+else ifeq ($(TARGET), vp)
+TARGET_CC = riscv64-unknown-elf-gcc
+TARGET_AR = riscv64-unknown-elf-ar
+TARGET_CFLAGS = -DTARGET_VP -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -static -Wall -nostdlib -ffreestanding -ffixed-x24 -ffixed-x25 -ffixed-x26 -ffixed-x27 -ffixed-x28 -ffixed-x29 -ffixed-x30 -ffixed-x31 -mcmodel=medany -mno-relax
+TARGET_LIBS = -lgcc -Wl,-e,_start
+TARGET_SIM = riscv64-vp --quiet --intercept-syscalls --mojov-sk=../target/sk-file.pem --error-on-zero-traphandler=true
+TARGET_DIFF = diff
+TARGET_EXE = $(PROG).elf
+TARGET_CLEAN =
+TARGET_CONFIGURED = 1
+TARGET_REFEXT = out
 else
 # default is an unconfigured
 TARGET_CONFIGURED = 0
@@ -277,8 +288,10 @@ else ifeq ($(TARGET), spike32-pk)
 else ifeq ($(TARGET), spike64-pk)
 	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LIBS) $(TARGET_LIBS)
 else ifeq ($(TARGET), mojov-spike)
-	$(TARGET_CC) $(LFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
+	$(TARGET_CC) $(CFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
 else ifeq ($(TARGET), mojov-llvm)
+	$(TARGET_CC) $(LFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
+else ifeq ($(TARGET), vp)
 	$(TARGET_CC) $(CFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
 else
 	$(error MODE is not defined (add: TARGET={host|sa}).)

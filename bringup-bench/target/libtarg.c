@@ -15,11 +15,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_SPIN  10000     /* make this larger for a real hardware platform */
-#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE)
+#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_VP)
+#include <stdio.h>
+#include "vp_syscalls.h"
 //#include <stdlib.h>
 
 /* simple system MMAP'ed registers */
-#define SIMPLE_CTRL_BASE   0x20000
+#define SIMPLE_CTRL_BASE   0x02011000UL
 #define SIMPLE_CTRL_OUT    0x00
 #define SIMPLE_CTRL_CTRL   0x08
 #define SIMPLE_CTRL_HIHASH 0x10
@@ -253,7 +255,7 @@ SPIN_SUCCESS_ADDR:
   /* print the output hash value */
   simple_output_hash(__hashval);
   simple_halt();
-#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE)
+#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_VP)
   // libmin_printf("EXIT: success\n");
   simple_halt();
 #elif defined(TARGET_CVA6_RV64)
@@ -281,7 +283,7 @@ SPIN_FAIL_ADDR:
 #elif defined(TARGET_HAHOST)
   /* exit if we ever get here */
   exit(code);
-#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE)
+#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_VP)
   // libmin_printf("EXIT: fail code = %d\n", code);
   simple_halt();
 #elif defined(TARGET_CVA6_RV64)
@@ -308,7 +310,7 @@ libtarg_putc(char c)
 #elif defined(TARGET_HASPIKE)
   // simple_putchar(c);
   __hashval = libmin_fnv64a(&c, 1, __hashval);
-#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE)
+#elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_VP)
   simple_putchar(c);
 #elif defined(TARGET_CVA6_RV64)
   _cva6_putchar(c);
@@ -329,7 +331,7 @@ static uint8_t __heap[MAX_HEAP];
 static uint32_t __heap_ptr = 0;
 #endif /* TARGET_HAHOST */
 
-#if defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_CVA6_RV64)
+#if defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_CVA6_RV64) || defined(TARGET_VP)
 #define MAX_HEAP    (32*1024)
 static uint8_t __heap[MAX_HEAP];
 static uint32_t __heap_ptr = 0;
@@ -344,7 +346,7 @@ libtarg_sbrk(size_t inc)
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif /* __clang__ */
   return sbrk(inc);
-#elif defined(TARGET_SA) || defined(TARGET_HAHOST) || defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_CVA6_RV64)
+#elif defined(TARGET_SA) || defined(TARGET_HAHOST) || defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_CVA6_RV64) || defined(TARGET_VP)
   uint8_t *ptr = &__heap[__heap_ptr];
   if (inc == 0)
     return ptr;

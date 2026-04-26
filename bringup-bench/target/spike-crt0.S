@@ -2,7 +2,7 @@
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-#define SIM_CTRL_BASE 0x20000
+#define SIM_CTRL_BASE 0x02011000UL
 #define SIM_CTRL_OUT 0x0
 #define SIM_CTRL_CTRL 0x8
 
@@ -64,6 +64,11 @@ _start:
   or   t1, t1, t0           # set FS = 11 (Dirty)
   csrw mstatus, t1
 
+  /* install trap vector table */
+  la   t0, __vector_start
+  ori  t0, t0, 1
+  csrw mtvec, t0  
+
   /* clear BSS */
   la x26, _bss_start
   la x27, _bss_end
@@ -96,6 +101,8 @@ sleep_loop:
 
   .section .vectors, "ax"
   .option norvc;
+  .global __vector_start
+  __vector_start:  
 
   // All unimplemented interrupts/exceptions go to the default_exc_handler.
   .org 0x00
