@@ -17,7 +17,6 @@
 #define MAX_SPIN  10000     /* make this larger for a real hardware platform */
 #elif defined(TARGET_SIMPLE) || defined(TARGET_SPIKE) || defined(TARGET_HASPIKE) || defined(TARGET_VP)
 #include <stdio.h>
-#include "vp_syscalls.h"
 //#include <stdlib.h>
 
 /* simple system MMAP'ed registers */
