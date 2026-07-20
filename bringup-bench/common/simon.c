@@ -8,6 +8,7 @@
 
 #include "libmin.h"
 #include "simon.h"
+#include <string.h>
 
 
 // Cipher Operation Macros
@@ -336,8 +337,10 @@ void Simon_Encrypt_128(const uint8_t round_limit, const uint8_t *key_schedule, c
         // Feistel Cross
         *y_word = *x_word;
         
+        uint64_t round_key;
+        memcpy(&round_key, key_schedule + (i * 8), sizeof(uint64_t));
         // XOR with Round Key
-        *x_word = temp ^ *(round_key_ptr + i);
+        *x_word = temp ^ round_key;
     }
 }
 
@@ -473,9 +476,11 @@ void Simon_Decrypt_128(const uint8_t round_limit, const uint8_t *key_schedule, c
         
         // Feistel Cross
         *y_word = *x_word;
-        
+
+        uint64_t round_key;
+        memcpy(&round_key, key_schedule + (i * 8), sizeof(uint64_t));
         // XOR with Round Key
-        *x_word = temp ^ *(round_key_ptr + i);
+        *x_word = temp ^ round_key;
     }
 }
 
