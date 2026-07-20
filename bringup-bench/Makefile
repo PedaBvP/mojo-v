@@ -171,14 +171,14 @@ TARGET_CONFIGURED = 1
 TARGET_REFEXT = out
 else ifeq ($(TARGET), mojov)
 #TARGET_CC = /opt/riscv/bin/clang
-TARGET_CC = /opt/riscv/bin/riscv64-unknown-elf-gcc -std=c2x
+TARGET_CC = riscv64-unknown-elf-gcc -std=c2x
 #TARGET_CXX = /opt/riscv/bin/clang++
-TARGET_CXX = /opt/riscv/bin/riscv64-unknown-elf-g++
-TARGET_AR = /opt/riscv/bin/riscv64-unknown-elf-ar
+TARGET_CXX = riscv64-unknown-elf-g++
+TARGET_AR = riscv64-unknown-elf-ar
 TARGET_REGOUT = -ffixed-x24 -ffixed-x25 -ffixed-x26 -ffixed-x27 -ffixed-x28 -ffixed-x29 -ffixed-x30 -ffixed-x31 -ffixed-f24 -ffixed-f25 -ffixed-f26 -ffixed-f27 -ffixed-f28 -ffixed-f29 -ffixed-f30 -ffixed-f31
 TARGET_CFLAGS = -Wno-inline-asm -DTARGET_SPIKE -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -Wall -fvisibility=hidden -nostdlib -ffreestanding -fno-exceptions -mcmodel=medany $(TARGET_REGOUT)# -Wl,--no-relax -MMD -std=c2x
 TARGET_LFLAGS = -static -march=rv64gc_zicond -mabi=lp64 -fvisibility=hidden -nostdlib -ffreestanding -mcmodel=medany
-TARGET_LIBS = /opt/riscv/lib/gcc/riscv64-unknown-elf/15.1.0/rv64imac/lp64/libgcc.a
+TARGET_LIBS = -lgcc
 TARGET_SIM = ../../riscv-isa-sim/build/spike --mojov-pk=../target/pk-file.pem --mojov-sk=../target/sk-file.pem --isa=rv64gc_zicond_zkmojov_zicntr --misaligned --extlib=../target/spike_mmio_plugin.so -m0x100000:0x820000 --device=spike_mmio_plugin,0x20000 $(LOCAL_SIMOPTS)
 TARGET_DIFF = diff
 TARGET_EXE = $(PROG).elf
@@ -198,6 +198,20 @@ TARGET_DIFF = diff
 TARGET_EXE = $(PROG).elf
 TARGET_CLEAN = *.d ibex_simple_system_pcount.csv
 TARGET_EXCLUDES = anagram c-interp checkers lz-compress rsa-cipher spelt2num
+TARGET_CONFIGURED = 1
+TARGET_REFEXT = out
+else ifeq ($(TARGET), vp)
+TARGET_CC = riscv64-unknown-elf-gcc
+TARGET_CXX = riscv64-unknown-elf-g++
+TARGET_AR = riscv64-unknown-elf-ar
+TARGET_REGOUT = -ffixed-x24 -ffixed-x25 -ffixed-x26 -ffixed-x27 -ffixed-x28 -ffixed-x29 -ffixed-x30 -ffixed-x31 -ffixed-f24 -ffixed-f25 -ffixed-f26 -ffixed-f27 -ffixed-f28 -ffixed-f29 -ffixed-f30 -ffixed-f31
+TARGET_CFLAGS = -DTARGET_SPIKE -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -static -Wall -nostdlib -ffreestanding -mcmodel=medany -mno-relax $(TARGET_REGOUT)
+TARGET_LIBS = -lgcc -Wl,-e,_start
+TARGET_SIM = riscv64-vp --quiet --intercept-syscalls --mojov-pk=../target/pk-file.pem --mojov-sk=../target/sk-file.pem --error-on-zero-traphandler=true --en-ext-Zicond
+TARGET_DIFF = diff
+TARGET_EXCLUDES = anagram c-interp checkers lz-compress rsa-cipher spelt2num
+TARGET_EXE = $(PROG).elf
+TARGET_CLEAN =
 TARGET_CONFIGURED = 1
 TARGET_REFEXT = out
 else
@@ -264,6 +278,8 @@ else ifeq ($(TARGET), mojov)
 	$(TARGET_CC) $(LFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
 else ifeq ($(TARGET), mojov-llvm)
 	$(TARGET_CC) $(CFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
+else ifeq ($(TARGET), vp)
+	$(TARGET_CC) $(CFLAGS) -T ../target/spike-map.ld $^ ../target/spike-crt0.S -nostartfiles -o $@ $(LIBS) $(TARGET_LIBS)
 else
 	$(error MODE is not defined (add: TARGET={host|sa}).)
 endif
@@ -307,6 +323,11 @@ clean-all all-clean:
 spike-build:
 	$(MAKE) -C target clean build
 
+
+# seq-align scrambled-compare regex-match manacher-lps lcs fuzzy-match mojov-stringtests mojov-sectests
+MOJOV_TESTS = mojov-test mojov-test1 mojov-test2 mojov-test3 mojov-test4 mojov-test5 mojov-typetests mojov-pctests mojov-mathtests 
+MOJOV_APPS = bitonic-sort bloom-filter bubble-sort bubble-sort-strong chi-squared distinctness distinctness-Onlog2n edit-distance eulers-approx fft-int flood-fill flood-fill-On2 gcd-list gemm gemm-strong grad-descent heat-calc heldkarp-tsp highlife kadane kalman-filter kcore-decomp kepler-calc knapsack lda mersenne minspan monte-carlo moving-average moving-average-fp64 nbody-sim nonlinear-nn nr-solver ntt-kernel packet-filter pagerank parrondo partition-equal pca-analysis primal-test private-join psi quartile-stats rabinkarp-search rad-to-deg randshell-sort ransac shortest-path sieve skeleton soundex string-search tea-cipher tiny-NN triangle-count variability-sample verletrisk-score
+MOJOV_BMARKS = $(MOJOV_TESTS) $(MOJOV_APPS)
 MOJOV_TESTS = mojov-test mojov-test1 mojov-test2 mojov-test3 mojov-test4 mojov-test5 mojov-typetests mojov-sectests mojov-pctests mojov-mathtests mojov-stringtests
 MOJOV_APPS = bitonic-sort bloom-filter bubble-sort bubble-sort-strong chi-squared distinctness distinctness-Onlog2n edit-distance eulers-approx fft-int flood-fill flood-fill-On2 fuzzy-match gcd-list gemm gemm-strong grad-descent heat-calc heldkarp-tsp highlife kadane kalman-filter kcore-decomp kepler-calc knapsack lcs lda manacher-lps mersenne minspan monte-carlo moving-average moving-average-fp64 nbody-sim nonlinear-nn nr-solver ntt-kernel packet-filter private-auction vote-tally gene-risk pagerank parrondo partition-equal pca-analysis primal-test private-join psi quartile-stats rabinkarp-search rad-to-deg randshell-sort ransac regex-match risk-score scrambled-compare seq-align shortest-path sieve skeleton soundex string-search tea-cipher tiny-NN triangle-count variability-sample verlet
 MOJOV_DISCAPPS = gene-risk private-auction vote-tally
@@ -318,7 +339,7 @@ mojov-tests:
 	  echo "--------------------------------" ; \
 	  echo "Running "$$_BMARK" in TARGET=mojov" ; \
 	  echo "--------------------------------" ; \
-	  $(MAKE) TARGET=mojov clean build test || exit 1; \
+	  $(MAKE) TARGET=$$TARGET clean build test || exit 1; \
 	  cd .. ; \
 	done
 
