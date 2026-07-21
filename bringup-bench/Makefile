@@ -185,10 +185,10 @@ TARGET_CONFIGURED = 1
 TARGET_REFEXT = out
 else ifeq ($(TARGET), mojov-spike)
 #TARGET_CC = /opt/riscv/bin/clang
-TARGET_CC = riscv64-unknown-elf-gcc -std=c2x
+TARGET_CC = /opt/riscv/bin/riscv64-unknown-elf-gcc -std=c2x
 #TARGET_CXX = /opt/riscv/bin/clang++
-TARGET_CXX = riscv64-unknown-elf-g++
-TARGET_AR = riscv64-unknown-elf-ar
+TARGET_CXX = /opt/riscv/bin/riscv64-unknown-elf-g++
+TARGET_AR = /opt/riscv/bin/riscv64-unknown-elf-ar
 TARGET_REGOUT = -ffixed-x24 -ffixed-x25 -ffixed-x26 -ffixed-x27 -ffixed-x28 -ffixed-x29 -ffixed-x30 -ffixed-x31 -ffixed-f24 -ffixed-f25 -ffixed-f26 -ffixed-f27 -ffixed-f28 -ffixed-f29 -ffixed-f30 -ffixed-f31
 TARGET_CFLAGS = -Wno-inline-asm -DTARGET_SPIKE -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -Wall -fvisibility=hidden -nostdlib -ffreestanding -fno-exceptions -mcmodel=medany $(TARGET_REGOUT)# -Wl,--no-relax -MMD -std=c2x
 TARGET_LFLAGS = -static -march=rv64gc_zicond -mabi=lp64 -fvisibility=hidden -nostdlib -ffreestanding -mcmodel=medany
@@ -215,11 +215,11 @@ TARGET_EXCLUDES = anagram c-interp checkers lz-compress rsa-cipher spelt2num
 TARGET_CONFIGURED = 1
 TARGET_REFEXT = out
 else ifeq ($(TARGET), vp)
-TARGET_CC = riscv64-unknown-elf-gcc
-TARGET_CXX = riscv64-unknown-elf-g++
-TARGET_AR = riscv64-unknown-elf-ar
+TARGET_CC = /opt/riscv/bin/riscv64-unknown-elf-gcc
+TARGET_CXX = /opt/riscv/bin/riscv64-unknown-elf-g++
+TARGET_AR = /opt/riscv/bin/riscv64-unknown-elf-ar
 TARGET_REGOUT = -ffixed-x24 -ffixed-x25 -ffixed-x26 -ffixed-x27 -ffixed-x28 -ffixed-x29 -ffixed-x30 -ffixed-x31 -ffixed-f24 -ffixed-f25 -ffixed-f26 -ffixed-f27 -ffixed-f28 -ffixed-f29 -ffixed-f30 -ffixed-f31
-TARGET_CFLAGS = -DTARGET_SPIKE -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -static -Wall -nostdlib -ffreestanding -mcmodel=medany -mno-relax $(TARGET_REGOUT)
+TARGET_CFLAGS = -DTARGET_SPIKE -DLIBMIN_MALLOC_ALIGN_BYTES=8 -march=rv64gc_zicond -mabi=lp64 -static -Wall -nostdlib -ffreestanding -fno-exceptions -mcmodel=medany -mno-relax $(TARGET_REGOUT)
 TARGET_LIBS = -lgcc -Wl,-e,_start
 TARGET_SIM = riscv64-vp --quiet --intercept-syscalls --mojov-pk=../target/pk-file.pem --mojov-sk=../target/sk-file.pem --error-on-zero-traphandler=true --en-ext-Zicond
 TARGET_DIFF = diff
