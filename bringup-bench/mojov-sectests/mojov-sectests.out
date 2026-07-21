@@ -1213,7 +1213,7 @@ After enable, mprivregcfg = 0x3f013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 63...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e0063
+  mtval  = 0x000e1463
 ERROR: failure with termination code `1'
 --- Test 64 ---
 INFO: KMSM contract open succeeded.
@@ -1232,7 +1232,7 @@ After enable, mprivregcfg = 0x40013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 64...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e1063
+  mtval  = 0x000e0463
 ERROR: failure with termination code `1'
 --- Test 65 ---
 INFO: KMSM contract open succeeded.
@@ -1251,7 +1251,7 @@ After enable, mprivregcfg = 0x41013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 65...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e4063
+  mtval  = 0x000e5463
 ERROR: failure with termination code `1'
 --- Test 66 ---
 INFO: KMSM contract open succeeded.
@@ -1270,7 +1270,7 @@ After enable, mprivregcfg = 0x42013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 66...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e5063
+  mtval  = 0x000e4463
 ERROR: failure with termination code `1'
 --- Test 67 ---
 INFO: KMSM contract open succeeded.
@@ -1289,7 +1289,7 @@ After enable, mprivregcfg = 0x43013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 67...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e6063
+  mtval  = 0x000e7463
 ERROR: failure with termination code `1'
 --- Test 68 ---
 INFO: KMSM contract open succeeded.
@@ -1308,7 +1308,7 @@ After enable, mprivregcfg = 0x44013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 68...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x000e7063
+  mtval  = 0x000e6463
 ERROR: failure with termination code `1'
 --- Test 69 ---
 INFO: KMSM contract open succeeded.
@@ -1327,7 +1327,7 @@ After enable, mprivregcfg = 0x45013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 69...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c00063
+  mtval  = 0x01c01463
 ERROR: failure with termination code `1'
 --- Test 70 ---
 INFO: KMSM contract open succeeded.
@@ -1346,7 +1346,7 @@ After enable, mprivregcfg = 0x46013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 70...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c01063
+  mtval  = 0x01c00463
 ERROR: failure with termination code `1'
 --- Test 71 ---
 INFO: KMSM contract open succeeded.
@@ -1365,7 +1365,7 @@ After enable, mprivregcfg = 0x47013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 71...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c04063
+  mtval  = 0x01c05463
 ERROR: failure with termination code `1'
 --- Test 72 ---
 INFO: KMSM contract open succeeded.
@@ -1384,7 +1384,7 @@ After enable, mprivregcfg = 0x48013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 72...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c05063
+  mtval  = 0x01c04463
 ERROR: failure with termination code `1'
 --- Test 73 ---
 INFO: KMSM contract open succeeded.
@@ -1403,7 +1403,7 @@ After enable, mprivregcfg = 0x49013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 73...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c06063
+  mtval  = 0x01c07463
 ERROR: failure with termination code `1'
 --- Test 74 ---
 INFO: KMSM contract open succeeded.
@@ -1422,7 +1422,7 @@ After enable, mprivregcfg = 0x4a013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 74...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01c07063
+  mtval  = 0x01c06463
 ERROR: failure with termination code `1'
 --- Test 75 ---
 INFO: KMSM contract open succeeded.
@@ -1441,7 +1441,7 @@ After enable, mprivregcfg = 0x4b013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 75...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x00008e02
+  mtval  = 0x000e0067
 ERROR: failure with termination code `1'
 --- Test 76 ---
 INFO: KMSM contract open succeeded.
@@ -3854,7 +3854,7 @@ After enable, mprivregcfg = 0xca013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 202...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x00070e0b
+  mtval  = 0x00058e0b
 ERROR: failure with termination code `1'
 --- Test 203 ---
 INFO: KMSM contract open succeeded.
@@ -3873,7 +3873,7 @@ After enable, mprivregcfg = 0xcb013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 203...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x00072e0b
+  mtval  = 0x0005ae0b
 ERROR: failure with termination code `1'
 --- Test 204 ---
 INFO: KMSM contract open succeeded.
@@ -3892,7 +3892,7 @@ After enable, mprivregcfg = 0xcc013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 204...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x0005878b
+  mtval  = 0x0006078b
 ERROR: failure with termination code `1'
 --- Test 205 ---
 INFO: KMSM contract open succeeded.
@@ -3911,7 +3911,7 @@ After enable, mprivregcfg = 0xcd013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 205...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x0005a78b
+  mtval  = 0x0006a78b
 ERROR: failure with termination code `1'
 --- Test 206 ---
 INFO: KMSM contract open succeeded.
@@ -3968,7 +3968,7 @@ After enable, mprivregcfg = 0xd0013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 208...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de0063
+  mtval  = 0x01de1463
 ERROR: failure with termination code `1'
 --- Test 209 ---
 INFO: KMSM contract open succeeded.
@@ -3987,7 +3987,7 @@ After enable, mprivregcfg = 0xd1013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 209...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de1063
+  mtval  = 0x01de0463
 ERROR: failure with termination code `1'
 --- Test 210 ---
 INFO: KMSM contract open succeeded.
@@ -4006,7 +4006,7 @@ After enable, mprivregcfg = 0xd2013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 210...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de4063
+  mtval  = 0x01de5463
 ERROR: failure with termination code `1'
 --- Test 211 ---
 INFO: KMSM contract open succeeded.
@@ -4025,7 +4025,7 @@ After enable, mprivregcfg = 0xd3013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 211...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de5063
+  mtval  = 0x01de4463
 ERROR: failure with termination code `1'
 --- Test 212 ---
 INFO: KMSM contract open succeeded.
@@ -4044,7 +4044,7 @@ After enable, mprivregcfg = 0xd4013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 212...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de6063
+  mtval  = 0x01de7463
 ERROR: failure with termination code `1'
 --- Test 213 ---
 INFO: KMSM contract open succeeded.
@@ -4063,7 +4063,7 @@ After enable, mprivregcfg = 0xd5013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 213...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x01de7063
+  mtval  = 0x01de6463
 ERROR: failure with termination code `1'
 --- Test 214 ---
 INFO: KMSM contract open succeeded.
@@ -4082,7 +4082,7 @@ After enable, mprivregcfg = 0xd6013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 214...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x00f5900b
+  mtval  = 0x00f6100b
 ERROR: failure with termination code `1'
 --- Test 215 ---
 INFO: KMSM contract open succeeded.
@@ -4101,7 +4101,7 @@ After enable, mprivregcfg = 0xd7013, (mojov_en:t, key_valid:t, format_sel:fast, 
 INFO: Running Mojo-V test 215...
 ERROR: *** TRAP ***
   mcause = 0x1f (Mojo-V security exception)
-  mtval  = 0x00f5b00b
+  mtval  = 0x00f6b00b
 ERROR: failure with termination code `1'
 --- Test 216 ---
 INFO: KMSM contract open succeeded.
