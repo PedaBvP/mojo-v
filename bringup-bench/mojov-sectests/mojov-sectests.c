@@ -919,64 +919,66 @@ main(void)
 
   //
   // branch predicate uses secret GPR
+  // Local labels keep the branch offset at zero with both GNU as and LLVM.
+  // These branches must raise a security exception before execution.
   //
   case 63:
-    __asm__ volatile ("beq  x28, x0, 100000");
+    __asm__ volatile ("1: beq  x28, x0, 1b");
     negfailed();
     break;
 
   case 64:
-    __asm__ volatile ("bne  x28, x0, 100000");
+    __asm__ volatile ("1: bne  x28, x0, 1b");
     negfailed();
     break;
 
   case 65:
-    __asm__ volatile ("blt  x28, x0, 100000");
+    __asm__ volatile ("1: blt  x28, x0, 1b");
     negfailed();
     break;
 
   case 66:
-    __asm__ volatile ("bge  x28, x0, 100000");
+    __asm__ volatile ("1: bge  x28, x0, 1b");
     negfailed();
     break;
 
   case 67:
-    __asm__ volatile ("bltu x28, x0, 100000");
+    __asm__ volatile ("1: bltu x28, x0, 1b");
     negfailed();
     break;
 
   case 68:
-    __asm__ volatile ("bgeu x28, x0, 100000");
+    __asm__ volatile ("1: bgeu x28, x0, 1b");
     negfailed();
     break;
 
   case 69:
-    __asm__ volatile ("beq  x0,  x28, 100000");
+    __asm__ volatile ("1: beq  x0,  x28, 1b");
     negfailed();
     break;
 
   case 70:
-    __asm__ volatile ("bne  x0,  x28, 100000");
+    __asm__ volatile ("1: bne  x0,  x28, 1b");
     negfailed();
     break;
 
   case 71:
-    __asm__ volatile ("blt  x0,  x28, 100000");
+    __asm__ volatile ("1: blt  x0,  x28, 1b");
     negfailed();
     break;
 
   case 72:
-    __asm__ volatile ("bge  x0,  x28, 100000");
+    __asm__ volatile ("1: bge  x0,  x28, 1b");
     negfailed();
     break;
 
   case 73:
-    __asm__ volatile ("bltu  x0,  x28, 100000");
+    __asm__ volatile ("1: bltu  x0,  x28, 1b");
     negfailed();
     break;
 
   case 74:
-    __asm__ volatile ("bgeu x0,  x28, 100000");
+    __asm__ volatile ("1: bgeu x0,  x28, 1b");
     negfailed();
     break;
 
@@ -1727,32 +1729,32 @@ main(void)
   // branch predicate uses double secret GPR
   //
   case 208:
-    __asm__ volatile ("beq  x28, x29, 100000");
+    __asm__ volatile ("1: beq  x28, x29, 1b");
     negfailed();
     break;
 
   case 209:
-    __asm__ volatile ("bne  x28, x29, 100000");
+    __asm__ volatile ("1: bne  x28, x29, 1b");
     negfailed();
     break;
 
   case 210:
-    __asm__ volatile ("blt  x28, x29, 100000");
+    __asm__ volatile ("1: blt  x28, x29, 1b");
     negfailed();
     break;
 
   case 211:
-    __asm__ volatile ("bge  x28, x29, 100000");
+    __asm__ volatile ("1: bge  x28, x29, 1b");
     negfailed();
     break;
 
   case 212:
-    __asm__ volatile ("bltu x28, x29, 100000");
+    __asm__ volatile ("1: bltu x28, x29, 1b");
     negfailed();
     break;
 
   case 213:
-    __asm__ volatile ("bgeu x28, x29, 100000");
+    __asm__ volatile ("1: bgeu x28, x29, 1b");
     negfailed();
     break;
 
