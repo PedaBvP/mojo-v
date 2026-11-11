@@ -52,7 +52,7 @@
 #define CHECK_LEAKY_FP(reg) ((p->get_secreg_mode() && IS_FP_SECREG(reg)) ? (throw trap_security_exception(insn.bits()), (void)0) : (void)0)
 #define FP_SECREG_REF(reg) (p->extension_enabled(EXT_ZKMOJOV) && p->get_secreg_mode() && IS_FP_SECREG(reg))
 #define FP_SECREG_RESET \
-  { DO_WRITE_FREG(X_FP0, freg(f64(0))); DO_WRITE_FREG(X_FP0, freg(f64(0))); DO_WRITE_FREG(X_FP0, freg(f64(0))); DO_WRITE_FREG(X_FP0, freg(f64(0))); \
+  { DO_WRITE_FREG(X_FP0, freg(f64(0))); DO_WRITE_FREG(X_FP1, freg(f64(0))); DO_WRITE_FREG(X_FP2, freg(f64(0))); DO_WRITE_FREG(X_FP3, freg(f64(0))); \
     DO_WRITE_FREG(X_FP4, freg(f64(0))); DO_WRITE_FREG(X_FP5, freg(f64(0))); DO_WRITE_FREG(X_FP6, freg(f64(0))); DO_WRITE_FREG(X_FP7, freg(f64(0))); }
 
 // Mojo-V: DFHASH handling
